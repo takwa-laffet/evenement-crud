@@ -1,0 +1,33 @@
+<h3>participation-form !</h3>
+
+<form #form="ngForm">
+  <label for="email">Email</label>
+  <input
+    type="text"
+    name="email"
+    ngModel
+    #emailCtrl="ngModel"
+    required
+    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  />
+  <div *ngIf="emailCtrl.touched && emailCtrl.invalid">
+    <span *ngIf="emailCtrl.hasError('required')" style="color: red">this field is required</span>
+    <span *ngIf="emailCtrl.hasError('pattern')" style="color: red">respect the pattern</span>
+  </div>
+  <label for="nbPalce">Nombre de Places</label>
+  <input
+    type="number"
+    name="nbPlace"
+    ngModel
+    #nbPlaceCtrl="ngModel"
+    min="1"
+    required
+    (blur)="calculTotalPrice(nbPlaceCtrl.value)"
+  />
+  <div *ngIf="nbPlaceCtrl.touched && nbPlaceCtrl.invalid">
+    <span *ngIf="nbPlaceCtrl.hasError('required')" style="color: red">this field is required</span>
+    <span *ngIf="nbPlaceCtrl.hasError('min')" style="color: red">respect the pattern</span>
+  </div>
+  <label for="">total : {{totalPrice}}</label>
+  <button [disabled]="form.invalid">save</button>
+</form>

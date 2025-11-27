@@ -1,0 +1,25 @@
+<!-- {{ eventList }} -->
+<div class="container py-4">
+  <h2 class="mb-3">Liste des événements</h2>
+
+  <!-- Recherche -->
+  <input
+    type="text"
+    class="form-control mb-4"
+    placeholder="Rechercher un événement"
+    [(ngModel)]="searchItem"
+  />
+
+  <button type="button" class="btn btn-primary" routerLink="./add">
+    Add new event
+  </button>
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let event of filter()">
+      <app-card
+        [event]="event"
+        (notifLike)="buy(event)"
+        (notifLike)="incLikes(event)"
+      ></app-card>
+    </div>
+  </div>
+</div>
