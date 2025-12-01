@@ -1,0 +1,53 @@
+<div class="container mt-4">
+
+  <h2 class="text-center mb-4">Events List</h2>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Events Grid -->
+  <div class="row" *ngIf="!isLoading && events.length > 0">
+
+    <div class="col-md-4 mb-4" *ngFor="let event of events">
+      <div class="card h-100 shadow-sm">
+
+        <!-- Event Image -->
+        <img 
+          *ngIf="event.imageUrl"
+          [src]="event.imageUrl" 
+          class="card-img-top" 
+          alt="Event Image">
+
+        <div class="card-body">
+
+          <h5 class="card-title">{{ event.titre }}</h5>
+          <p class="card-text">{{ event.description }}</p>
+
+          <p><strong>Date:</strong> {{ event.date | date:'medium' }}</p>
+          <p><strong>Lieu:</strong> {{ event.lieu }}</p>
+          <p><strong>Prix:</strong> {{ event.prix }} TND</p>
+
+          <span class="badge bg-primary me-1" *ngFor="let d of event.domaines">
+            {{ d }}
+          </span>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- No Events -->
+  <div *ngIf="!isLoading && events.length === 0" class="text-center mt-4">
+    <h5>No events available.</h5>
+  </div>
+
+</div>

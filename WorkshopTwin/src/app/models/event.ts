@@ -1,14 +1,13 @@
-// src/app/models/event.ts
 export interface Event {
-  id: number;
+  id?: number;
   titre: string;
   description: string;
-  date: string | Date; 
-  lieu: string;
+  date: string;   // LocalDateTime from Spring Boot → send as ISO string
   prix: number;
   nbPlaces: number;
+  lieu: string;
   imageUrl: string;
-  domaines?: string[];
+  domaines: string[];
   organisateurId: number;
   nbrLikes: number;
 }

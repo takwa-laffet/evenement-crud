@@ -1,9 +1,7 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,8 +16,8 @@ public class Event {
     private String titre;
     private String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime date;
+    // Change date type from LocalDateTime to String
+    private String date;
 
     private String lieu;
     private Double prix;

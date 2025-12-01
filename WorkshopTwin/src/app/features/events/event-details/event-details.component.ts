@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../shared/services/data.service';
 import { Event } from '../../../models/event';
@@ -6,9 +6,10 @@ import { Event } from '../../../models/event';
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
-  styleUrls: ['./event-details.component.css']
+  styleUrls: ['./event-details.component.css']   // FIX: styleUrl → styleUrls
 })
-export class EventDetailsComponent implements OnInit {
+export class EventDetailsComponent {
+
   id!: number;
   eventDetails!: Event;
 
@@ -17,15 +18,16 @@ export class EventDetailsComponent implements OnInit {
     private dataService: DataService
   ) {}
 
-  ngOnInit() {
-    this.id = +this.actRoute.snapshot.params['id']; // + converts string to number
+  ngOnInit(): void {
+    this.id = this.actRoute.snapshot.params['id'];
+
     this.dataService.getEventById(this.id).subscribe({
-      next: (event: Event) => {
-        this.eventDetails = event;
+      next: (data) => {
+        this.eventDetails = data;
+        console.log('Event details:', this.eventDetails);
       },
-      error: (err: any) => {
-        console.error('Error loading event:', err);
-        // Optional: redirect to 404 or show error message
+      error: () => {
+        console.error('Failed to load event details.');
       }
     });
   }

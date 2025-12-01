@@ -1,0 +1,52 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="p-4 shadow rounded bg-white">
+
+  <div class="mb-3">
+    <label class="form-label">Titre</label>
+    <input type="text" class="form-control" formControlName="titre" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" formControlName="description"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Date</label>
+    <input type="date" class="form-control" formControlName="date" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Prix</label>
+    <input type="number" class="form-control" formControlName="prix" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Places</label>
+    <input type="number" class="form-control" formControlName="nbPlaces" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Lieu</label>
+    <input type="text" class="form-control" formControlName="lieu" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" formControlName="imageUrl" />
+  </div>
+
+  <div formArrayName="domaines" class="mb-3">
+    <label>Domaines</label>
+
+    <div *ngFor="let d of domaines.controls; let i = index" class="d-flex gap-2 mb-2">
+      <input class="form-control" [formControlName]="i" />
+    </div>
+
+    <button type="button" class="btn btn-outline-primary" (click)="addDomain()">
+      + Ajouter domaine
+    </button>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">Créer</button>
+
+</form>

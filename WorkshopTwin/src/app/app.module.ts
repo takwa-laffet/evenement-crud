@@ -12,6 +12,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { TestComponent } from './test/test.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     NotfoundComponent,
     TestComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

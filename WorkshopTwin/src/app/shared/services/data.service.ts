@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Event } from '../models/event';
+import { Event } from '../../../app/models/event';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
+export class DataService {
+  
   private apiUrl = 'http://localhost:8080/api/events';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]> {
+  getEventList(): Observable<Event[]> {
     return this.http.get<Event[]>(this.apiUrl);
   }
 
-  getEvent(id: number): Observable<Event> {
+  getEventById(id: number): Observable<Event> {
     return this.http.get<Event>(`${this.apiUrl}/${id}`);
   }
 
-  addEvent(event: any): Observable<any> {
-     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-     return this.http.post('http://localhost:8080/api/events', event, { headers });
+  addEvent(event: Event): Observable<Event> {
+    return this.http.post<Event>(this.apiUrl, event);
   }
 
   updateEvent(id: number, event: Event): Observable<Event> {
