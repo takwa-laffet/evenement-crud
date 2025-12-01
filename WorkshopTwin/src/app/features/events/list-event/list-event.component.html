@@ -15,11 +15,13 @@
   </button>
 
   <div class="row g-3">
-    <div class="col-md-4" *ngFor="let event of filteredList">
+    <div class="col-md-4 col-3" *ngFor="let event of filteredList">
       <app-card
-        (notifLike)="incLikes(event)"
-        (notifBuy)="buy(event)"
-      ></app-card>
+  [event]="event"
+  (notifLike)="incLikes(event)"
+  (notifBuy)="buy(event)"
+></app-card>
+
     </div>
   </div>
 </div>

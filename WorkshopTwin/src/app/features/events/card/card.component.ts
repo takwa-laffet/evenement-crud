@@ -1,35 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../shared/services/data.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Event } from '../../../models/event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   
+  @Input() event!: Event; 
+  @Output() notifLike = new EventEmitter<Event>();
+  @Output() notifBuy = new EventEmitter<Event>();
 
-  events: Event[] = [];
-  isLoading = true;
-  errorMessage = '';
+  constructor(private route: Router) {}
 
-  constructor(private dataService: DataService) {}
-
-  ngOnInit(): void {
-    this.loadEvents();
+  likeEvent(e: Event) {
+    this.notifLike.emit(e);
   }
 
-  loadEvents(): void {
-    this.dataService.getEventList().subscribe({
-      next: (data) => {
-        this.events = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to load events.';
-        this.isLoading = false;
-      }
-    });
+  buyEvent(e: Event) {
+    this.notifBuy.emit(e);
   }
+
+  dateExpire(event: Event) {
+    return new Date(event.date) < new Date();
+  }
+
+  participate(prix: number) {
+    this.route.navigate(['/events/participate', prix]);
+  }
+  
 }
